@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Login/Register</title>
+	</head>
+	<body>
+		{% if messages %}
+			<ul class="messages">
+			    {% for message in messages %}
+			    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+			    {% endfor %}
+			</ul>
+		{% endif %}
+
+
+		<form action = '/login/register' method = 'post'>
+			{% csrf_token %}
+			First Name:<input type = 'text' name = 'first_name'>
+			Last Name:<input type = 'text' name = 'last_name'>
+			Email:<input type = 'text' name='email'>
+			Password:<input type = 'password' name='password' >
+			Confirm pw:<input type = 'password' name='password2'>
+			<input type = 'submit' value = 'Register'>
+		</form>
+		<hr/>
+		<form action ='/login/login' method = 'post'>
+			{% csrf_token %}
+			Email:<input type = 'text' name='email'>
+			Password:<input type = 'password' name='password'>
+		<input type = 'submit' value = 'Log In'>
+		<hr/>
+		{%for user in users%}
+			<strong>First Name:</strong> {{user.first_name}}
+			<strong>Last Name:</strong> {{user.last_name}}
+			<strong>Email:</strong> {{user.email}}
+			<strong>Password:</strong> {{user.password}}
+			<hr/>
+
+		{% endfor %}
+	</body>
+</html>
